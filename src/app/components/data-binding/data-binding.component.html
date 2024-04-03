@@ -1,0 +1,26 @@
+<div id="event-binding">
+    <h1>Event binding</h1>
+    <button (click)="toggleMessage()">Click me</button>
+</div>
+
+<div class="overlay" *ngIf="popup">
+    <div class="popup">
+        <h2>Event Triggered</h2>
+        <a class="close" (click)="toggleMessage()">&times;</a>
+        <div class="content">
+        I was triggered by an event
+        </div>
+    </div>
+</div>
+
+<div id="one-way">
+    <h1>One way data binding</h1>
+    <input type="text" value="{{ oneWay }}">
+</div>  
+
+<div id="two-way">
+    <h1>Two way data binding</h1>
+    <span>{{ twoWay }}</span>
+    <br /><br />
+    <input type="text" [(ngModel)]="twoWay">
+</div>
