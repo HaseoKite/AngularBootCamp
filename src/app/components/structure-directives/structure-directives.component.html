@@ -1,0 +1,32 @@
+<div>
+    <h1>NgFor</h1>
+    <ul>
+        <ng-container *ngFor="let character of characters">
+            <li>
+                {{ character }}
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
+<div>
+    <h1>NgIf</h1>
+    <ul>
+        <ng-container *ngFor="let character of characters">
+            <li *ngIf="character =='B'">
+                {{ character }}
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
+<div>
+    <h1>NgSwitch</h1>
+    <ul>
+        <ng-container *ngFor="let character of characters" [ngSwitch]="character">
+            <li *ngSwitchCase="'A'"> 1 </li>
+            <li *ngSwitchCase="'B'"> 2 </li>
+            <li *ngSwitchCase="'C'"> 3 </li>
+        </ng-container>
+    </ul>
+</div>
