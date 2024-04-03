@@ -1,0 +1,15 @@
+<div>
+    <button (click)="toggleActive()">Toggle active</button>
+    
+    <div>
+        <h1>ngClass</h1>
+        <span [ngClass]="{'red-text': activeClass}">Hello ngClass</span>
+        <pre>active : {{ activeClass }}</pre>
+    </div>
+
+    <div>
+        <h1>ngStyle</h1>
+        <span [ngStyle]="{color: activeStyle ? '#ff0000' : '#000000'}">Hello ngStyle</span>
+        <pre>active : {{ activeStyle }}</pre>
+    </div>
+</div>
