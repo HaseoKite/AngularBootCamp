@@ -1,0 +1,4 @@
+<div *ngFor="let slug of slugs | keyvalue" routerLink="{{ slug.key }}">
+    <button>Post #{{ slug.key }}</button>
+</div>
+  
