@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,14 +13,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule, Routes }   from '@angular/router';
+import { RouterLink, RouterModule, Routes } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HttpClientModule } from '@angular/common/http';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AppData } from './app-data/app-data';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,11 +35,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatListModule,
     RouterModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    RouterLink
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    importProvidersFrom(
+      HttpClientModule,
+      InMemoryWebApiModule.forRoot(AppData, { delay: 1000 })
+    )
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

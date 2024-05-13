@@ -1,0 +1,43 @@
+<div class="pagination">
+  <button
+    mat-icon-button
+    [disabled]="currentPage === 1"
+    (click)="selectPage(1)"
+  >
+    <mat-icon>first_page</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    [disabled]="currentPage === 1"
+    (click)="selectPage(currentPage - 1)"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <ng-container *ngFor="let page of visiblePages">
+    <button
+      mat-mini-fab
+      [disabled]="currentPage === page"
+      (click)="selectPage(page)"
+    >
+      {{ page }}
+    </button>
+  </ng-container>
+
+  <button
+    mat-icon-button
+    [disabled]="currentPage === totalPages"
+    (click)="selectPage(currentPage + 1)"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    [disabled]="currentPage === totalPages"
+    (click)="selectPage(totalPages)"
+  >
+    <mat-icon>last_page</mat-icon>
+  </button>
+</div>

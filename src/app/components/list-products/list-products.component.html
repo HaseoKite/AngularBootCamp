@@ -1,0 +1,75 @@
+<mat-form-field>
+  <mat-label>{{ filterLabel }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="filterValue"
+    (ngModelChange)="filterChangeHandler($event); currentPage = 1"
+  />
+  @if (filterValue) {
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="filterValue = ''; filterChangeHandler(''); currentPage = 1"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field>
+<br />
+<mat-checkbox
+  [(ngModel)]="onlyOffers"
+  (ngModelChange)="offersCheckbocChangeHandler($event); currentPage = 1"
+  >Solo ofertas!</mat-checkbox
+>
+
+<ng-container
+  *ngIf="filteredProducts$ | async as filteredProducts; else loadingRef"
+>
+  <div
+    class="container responsive-grid"
+    *ngIf="filteredProducts.length; else noProductsRef"
+  >
+    <mat-card
+      *ngFor="let product of filteredProducts | paginateProducts: currentPage"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ product.title }} </mat-card-title>
+      </mat-card-header>
+      <br />
+      <img mat-card-image [src]="getPhoto(product.photos[0])" />
+      <mat-card-content>
+        <br />
+        <p>{{ product.description }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-fab extended color="primary" routerLink="{{ product.id }}">
+          <mat-icon>details</mat-icon> Details
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <ng-container *ngIf="filteredProducts.length">
+    <app-paginator
+      [(currentPage)]="currentPage"
+      [totalProducts]="filteredProducts.length"
+    />
+  </ng-container>
+</ng-container>
+
+<ng-template #noProductsRef>
+  <div class="container responsive-grid">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ noProductsLabel }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</ng-template>
+
+<ng-template #loadingRef>
+  <div class="spinner-container">
+    <mat-spinner color="accent" [diameter]="40"></mat-spinner>
+  </div>
+</ng-template>

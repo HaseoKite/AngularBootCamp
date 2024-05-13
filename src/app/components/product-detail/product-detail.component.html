@@ -1,0 +1,70 @@
+<div class="product-card-container">
+  <div class="product-card">
+    <mat-card *ngIf="productDetail$ | async as productDetails; else loadingRef">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ productDetails.title | titlecase }}</mat-card-title>
+      </mat-card-header>
+
+      <div class="slideshow-container">
+        <ng-container *ngFor="let photo of productDetails.photos; index as i">
+          <div
+            class="mySlides fade"
+            [ngClass]="{ 'hide-image': activeImage != i }"
+          >
+            <img
+              alt="{{ activeImage - i }}"
+              src="{{ getPhoto(photo) }}"
+              style="width: 100%"
+            />
+          </div>
+        </ng-container>
+
+        <!-- Next and previous buttons -->
+        <button
+          class="prev"
+          mat-icon-button
+          (click)="prevImage(productDetails.photos.length)"
+        >
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button
+          class="next"
+          mat-icon-button
+          (click)="nextImage(productDetails.photos.length)"
+        >
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+
+        <div style="text-align: center">
+          <ng-container *ngFor="let photo of productDetails.photos; index as i">
+            <span class="dot" (click)="currentSlide(i)"></span>
+          </ng-container>
+        </div>
+      </div>
+      <br />
+
+      <mat-card-content>
+        <p>
+          {{ productDetails.description }}
+        </p>
+      </mat-card-content>
+
+      <app-prices
+        [prices]="productDetails.prices"
+        [discount]="productDetails.offerDiscount"
+      ></app-prices>
+
+      <mat-card-actions>
+        <a routerLink="/products"><button mat-button>Catalog</button></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #loadingRef>
+  <div class="loading">
+    <mat-spinner color="accent" [diameter]="40"></mat-spinner>
+    {{ loadingLabel }}
+  </div>
+</ng-template>

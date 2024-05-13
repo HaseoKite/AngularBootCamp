@@ -1,0 +1,18 @@
+<mat-card-content>
+    @for (price of prices | keyvalue; track price) {
+      <p>
+        <b>{{ price.key }}</b
+        >:
+        <span
+          [ngClass]="{ 'striked-price': discount }"
+          >{{ price.value | roundPrice | currency: 'MXN' }}</span
+        ><strong *ngIf="discount">
+          {{
+            discountedPrice(price.value, discount)
+              | roundPrice
+              | currency: 'MXN'
+          }}</strong
+        >
+      </p>
+    }
+  </mat-card-content>

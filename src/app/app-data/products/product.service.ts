@@ -54,7 +54,7 @@ export class ProductsService {
     )
   );
 
-  public selectUser(id: ProductT['id']): void {
+  public selectProduct(id: ProductT['id']): void {
     this.productSelectedSubject$$.next(id);
   }
 }
