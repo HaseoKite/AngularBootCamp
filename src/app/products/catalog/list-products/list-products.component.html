@@ -6,6 +6,7 @@
     [(ngModel)]="filterValue"
     (ngModelChange)="filterChangeHandler($event); currentPage = 1"
   />
+  <mat-icon matSuffix>search</mat-icon>
   @if (filterValue) {
     <button
       matSuffix
@@ -17,7 +18,7 @@
     </button>
   }
 </mat-form-field>
-<br />
+
 <mat-checkbox
   [(ngModel)]="onlyOffers"
   (ngModelChange)="offersCheckbocChangeHandler($event); currentPage = 1"

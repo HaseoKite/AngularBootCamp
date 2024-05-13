@@ -12,11 +12,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RoundPricePipe } from '../pipes/round.pipe';
+import { RoundPricePipe } from '../../pipes/round.pipe';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginatorComponent } from './paginator/paginator.component';
-import { PaginateProductsPipe } from '../pipes/paginate-products.pipe';
+import { PaginateProductsPipe } from '../../pipes/paginate-products.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PricesComponent } from './prices/prices.component';
 

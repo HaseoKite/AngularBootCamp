@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListProductsModule } from './products/list-products.module';
+import { ListProductsModule } from './products/catalog/list-products.module';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'products',
     loadChildren: () =>
-      import('./products/list-products-routing.module').then(
+      import('./products/catalog/list-products-routing.module').then(
         (m) => m.ListProductsRoutingModule
       )
   },

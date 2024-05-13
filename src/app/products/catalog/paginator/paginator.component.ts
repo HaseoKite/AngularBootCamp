@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PaginationConst } from '../../../constants/pagination-constants';
+import { PaginationConst } from '../../../../constants/pagination-constants';
 
 @Component({
   selector: 'app-paginator',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ProductsService } from '../../app-data/products/product.service';
-import { ProductT } from '../../app-data/products/product.type';
-import { GetPthoUrlService } from '../../services/get-ptho-url.service';
+import { ProductsService } from '../../../app-data/products/product.service';
+import { ProductT } from '../../../app-data/products/product.type';
+import { GetPthoUrlService } from '../../../services/get-ptho-url.service';
 
 @Component({
   selector: 'app-product-detail',
