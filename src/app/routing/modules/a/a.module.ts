@@ -7,17 +7,8 @@ import { A2Component } from '../../components/a2/a2.component';
 import { A3Component } from '../../components/a3/a3.component';
 import { ZModule } from '../z/z.module';
 
-
 @NgModule({
-  declarations: [
-    A1Component,
-    A2Component,
-    A3Component
-  ],
-  imports: [
-    CommonModule,
-    ARoutingModule,
-    ZModule
-  ]
+  declarations: [A1Component, A2Component, A3Component],
+  imports: [CommonModule, ARoutingModule, ZModule]
 })
-export class AModule { }
+export class AModule {}

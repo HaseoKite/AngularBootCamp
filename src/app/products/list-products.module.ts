@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ListProductsRoutingModule } from './list-products-routing.module';
-import { ListProductsComponent } from '../../components/list-products/list-products.component';
+import { ListProductsComponent } from './list-products/list-products.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -12,13 +12,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RoundPricePipe } from '../../pipes/round.pipe';
-import { ProductDetailComponent } from '../../components/product-detail/product-detail.component';
+import { RoundPricePipe } from '../pipes/round.pipe';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PaginatorComponent } from '../../components/paginator/paginator.component';
-import { PaginateProductsPipe } from '../../pipes/paginate-products.pipe';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { PaginateProductsPipe } from '../pipes/paginate-products.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { PricesComponent } from '../../components/prices/prices.component';
+import { PricesComponent } from './prices/prices.component';
 
 @NgModule({
   declarations: [
