@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../../app-data/products/product.service';
 import { ProductT } from '../../../app-data/products/product.type';
-import { GetPthoUrlService } from '../../../services/get-ptho-url.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,18 +20,13 @@ export class ProductDetailComponent {
 
   public constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly productsService: ProductsService,
-    private readonly getPhotoUrlService: GetPthoUrlService
+    private readonly productsService: ProductsService
   ) {}
 
   public ngAfterViewInit(): void {
     this.activatedRoute.params.subscribe((params: Params): void => {
       this.productsService.selectProduct(params['id']);
     });
-  }
-
-  getPhoto(photo: string) {
-    return this.getPhotoUrlService.getPhotoUrl(photo);
   }
 
   nextImage(totalImages: number): void {

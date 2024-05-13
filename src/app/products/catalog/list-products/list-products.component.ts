@@ -9,7 +9,6 @@ import {
   Subject
 } from 'rxjs';
 import { ProductT } from '../../../app-data/products/product.type';
-import { GetPthoUrlService } from '../../../services/get-ptho-url.service';
 
 @Component({
   selector: 'app-list-products',
@@ -60,10 +59,7 @@ export class ListProductsComponent {
     )
   );
 
-  public constructor(
-    private readonly productsService: ProductsService,
-    private readonly getPhotoUrlService: GetPthoUrlService
-  ) {}
+  public constructor(private readonly productsService: ProductsService) {}
 
   protected filterChangeHandler(event: string): void {
     this.filterSubject$$.next(event);
@@ -71,9 +67,5 @@ export class ListProductsComponent {
 
   protected offersCheckbocChangeHandler(event: boolean) {
     this.offersOnlySubject$$.next(event);
-  }
-
-  protected getPhoto(photo: string) {
-    return this.getPhotoUrlService.getPhotoUrl(photo);
   }
 }
