@@ -60,13 +60,15 @@
 </ng-container>
 
 <ng-template #noProductsRef>
-  <div class="container responsive-grid">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ noProductsLabel }}</mat-card-title>
-      </mat-card-header>
-    </mat-card>
-  </div>
+  <ng-template *ngIf="filterValue.length; else loadingRef">
+    <div class="container responsive-grid">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ noProductsLabel }}</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </ng-template>
 </ng-template>
 
 <ng-template #loadingRef>

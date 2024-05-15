@@ -11,7 +11,7 @@ export class PricesComponent {
   prices!: PricesT;
 
   @Input()
-  discount?: number;
+  discount!: number;
 
   discountedPrice(realPrice: number, discount: number): number {
     return realPrice - (realPrice * discount) / 100;

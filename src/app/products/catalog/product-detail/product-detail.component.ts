@@ -32,13 +32,11 @@ export class ProductDetailComponent {
   nextImage(totalImages: number): void {
     this.activeImage += 1;
     this.activeImage %= totalImages;
-    console.log(this.activeImage);
   }
 
   prevImage(totalImages: number): void {
     this.activeImage =
       this.activeImage > 0 ? this.activeImage - 1 : totalImages - 1;
-    console.log(this.activeImage);
   }
 
   currentSlide(index: number): void {

@@ -53,7 +53,7 @@ export class ListProductsComponent {
         return products.filter(
           (product: ProductT): boolean =>
             product.title.toLocaleLowerCase().includes(filter) &&
-            (!offersOnly || (offersOnly && product.offerDiscount != undefined))
+            (!offersOnly || (offersOnly && product.offerDiscount > 0))
         );
       }
     )

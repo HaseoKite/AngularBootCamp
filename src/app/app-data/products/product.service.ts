@@ -1,4 +1,4 @@
-import { combineLatest, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { ProductT, ProductIdT } from './product.type';
 import { HttpClient } from '@angular/common/http';
@@ -8,19 +8,27 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsService {
   private productsUrl: string = 'api/products';
-
   private productSelectedSubject$$: Subject<ProductT['id']> = new Subject<
     ProductT['id']
   >();
+
+  private productSubject$: BehaviorSubject<ProductT[]> = new BehaviorSubject<
+    ProductT[]
+  >([]);
 
   private productSelected$: Observable<ProductT['id']> =
     this.productSelectedSubject$$.asObservable();
 
   private http: HttpClient = inject(HttpClient);
 
-  public readonly products$: Observable<Array<ProductT>> = this.http.get<
-    Array<ProductT>
-  >(this.productsUrl);
+  constructor() {
+    this.http.get<ProductT[]>(this.productsUrl).subscribe((products) => {
+      this.productSubject$.next(products);
+    });
+  }
+
+  public readonly products$: Observable<Array<ProductT>> =
+    this.productSubject$.asObservable();
 
   public readonly productsId$: Observable<Array<ProductIdT>> =
     this.products$.pipe(
@@ -48,7 +56,7 @@ export class ProductsService {
         productSelected: ProductT['id'];
       }): ProductT => {
         return products.find(
-          (product: ProductT): boolean => product.id === productSelected
+          (product: ProductT): boolean => product.id == productSelected
         ) as ProductT;
       }
     )
@@ -56,5 +64,10 @@ export class ProductsService {
 
   public selectProduct(id: ProductT['id']): void {
     this.productSelectedSubject$$.next(id);
+  }
+
+  public addProduct(newProduct: ProductT): void {
+    newProduct.id = this.productSubject$.getValue().length + 1;
+    this.productSubject$.next([...this.productSubject$.getValue(), newProduct]);
   }
 }

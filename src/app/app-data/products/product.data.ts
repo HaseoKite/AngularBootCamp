@@ -3,7 +3,7 @@ import { ProductT } from './product.type';
 export class ProductData {
   public static products: Array<ProductT> = [
     {
-      id: '1',
+      id: 1,
       title: 'Athene Cunicularia',
       prices: {
         Baby: 100.25,
@@ -20,7 +20,7 @@ export class ProductData {
       offerDiscount: 10
     },
     {
-      id: '2',
+      id: 2,
       title: 'Falco Rusticolus',
       prices: {
         Baby: 45.76,
@@ -33,10 +33,11 @@ export class ProductData {
         'https://picsum.photos/800/600'
       ],
       description:
-        'Especie de ave falconiforme de la familia Falconidae, el más septentrional de los halcones'
+        'Especie de ave falconiforme de la familia Falconidae, el más septentrional de los halcones',
+      offerDiscount: 0
     },
     {
-      id: '3',
+      id: 3,
       title: 'Ursus Americanus Emmonsii',
       prices: {
         Baby: 564.82,
@@ -52,7 +53,7 @@ export class ProductData {
       offerDiscount: 15
     },
     {
-      id: '4',
+      id: 4,
       title: 'Casa Rusa',
       prices: {
         'Sin Amueblar': 1000000,
@@ -64,10 +65,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: '274 Sretensky Boulevard'
+      description: '274 Sretensky Boulevard',
+      offerDiscount: 0
     },
     {
-      id: '5',
+      id: 5,
       title: 'Fratercula Arctica',
       prices: {
         Baby: 675.45,
@@ -83,7 +85,7 @@ export class ProductData {
       offerDiscount: 20
     },
     {
-      id: '6',
+      id: 6,
       title: 'Edificio Abandonado',
       prices: {
         'Sin Restaurar': 7549874.65,
@@ -96,10 +98,11 @@ export class ProductData {
         'https://picsum.photos/800/600'
       ],
       description:
-        'Antiguo edificio abandonado con entrada en forma de arco con columnas y porche'
+        'Antiguo edificio abandonado con entrada en forma de arco con columnas y porche',
+      offerDiscount: 0
     },
     {
-      id: '7',
+      id: 7,
       title: 'Bubo Scandiacus',
       prices: {
         Baby: 656.87,
@@ -115,7 +118,7 @@ export class ProductData {
       offerDiscount: 25
     },
     {
-      id: '8',
+      id: 8,
       title: 'Chelonia Mydas',
       prices: {
         Baby: 245.76,
@@ -127,10 +130,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Especie de tortuga marina de la familia Cheloniidae'
+      description: 'Especie de tortuga marina de la familia Cheloniidae',
+      offerDiscount: 0
     },
     {
-      id: '9',
+      id: 9,
       title: 'Panthera Leo Female',
       prices: {
         Baby: 2347.54,
@@ -147,7 +151,7 @@ export class ProductData {
       offerDiscount: 30
     },
     {
-      id: '10',
+      id: 10,
       title: 'Cereza',
       prices: {
         Kg: 10.1,
@@ -159,10 +163,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Fruto de varios árboles del género Prunus'
+      description: 'Fruto de varios árboles del género Prunus',
+      offerDiscount: 0
     },
     {
-      id: '11',
+      id: 11,
       title: 'Betta splendens',
       prices: {
         Baby: 20.76,
@@ -179,7 +184,7 @@ export class ProductData {
       offerDiscount: 35
     },
     {
-      id: '12',
+      id: 12,
       title: 'Tranvia',
       prices: {
         Chico: 50.5,
@@ -192,10 +197,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Sistema de transporte ferroviario'
+      description: 'Sistema de transporte ferroviario',
+      offerDiscount: 0
     },
     {
-      id: '13',
+      id: 13,
       title: 'Dracaena Draco',
       prices: {
         Seed: 150.54,
@@ -212,7 +218,7 @@ export class ProductData {
       offerDiscount: 40
     },
     {
-      id: '14',
+      id: 14,
       title: 'Ananas Comosus',
       prices: {
         Kg: 20.5,
@@ -225,10 +231,11 @@ export class ProductData {
         '800/600'
       ],
       description:
-        'Especie de la familia de las bromeliáceas, nativa de América del Sur'
+        'Especie de la familia de las bromeliáceas, nativa de América del Sur',
+      offerDiscount: 0
     },
     {
-      id: '15',
+      id: 15,
       title: 'Phalaenopsis',
       prices: {
         Seed: 76.97,
@@ -244,7 +251,7 @@ export class ProductData {
       offerDiscount: 45
     },
     {
-      id: '16',
+      id: 16,
       title: 'Arbol',
       prices: {
         Seed: 26.87,
@@ -256,10 +263,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Producto Aleatorio'
+      description: 'Producto Aleatorio',
+      offerDiscount: 0
     },
     {
-      id: '17',
+      id: 17,
       title: 'Burro Majorero',
       prices: {
         Baby: 456.86,
@@ -276,7 +284,7 @@ export class ProductData {
       offerDiscount: 50
     },
     {
-      id: '18',
+      id: 18,
       title: 'Samoyedo',
       prices: {
         Baby: 265.76,
@@ -288,10 +296,11 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Raza de perro originaria de Rusia'
+      description: 'Raza de perro originaria de Rusia',
+      offerDiscount: 0
     },
     {
-      id: '19',
+      id: 19,
       title: 'Mceta',
       prices: {
         '16lt': 256.76,
@@ -307,7 +316,7 @@ export class ProductData {
       offerDiscount: 5
     },
     {
-      id: '20',
+      id: 20,
       title: 'Automovil Renovado',
       prices: {
         'Sin Cambios': 128836.76,
@@ -319,7 +328,8 @@ export class ProductData {
         'https://picsum.photos/400/300',
         'https://picsum.photos/800/600'
       ],
-      description: 'Automovil Recien Renovado'
+      description: 'Automovil Recien Renovado',
+      offerDiscount: 0
     }
   ];
 }

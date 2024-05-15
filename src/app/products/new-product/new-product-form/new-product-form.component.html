@@ -1,0 +1,428 @@
+<div class="max-w-4xl mx-auto">
+  <form
+    class="m-10 rounded-md p-6 shadow-lg shadow-primary"
+    [formGroup]="newProductForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <legend class="legend">
+      {{ label.newProduct }}
+    </legend>
+
+    <ng-container [ngTemplateOutlet]="accordionActionsRef"></ng-container>
+
+    <mat-accordion multi>
+      <!-- Product Details -->
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="mr-4" color="accent">inventory_2</mat-icon>
+            {{ label.productDetails }}</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <ng-container
+          [ngTemplateOutlet]="productDetailsFieldsetRef"
+        ></ng-container>
+      </mat-expansion-panel>
+
+      <!-- Photos -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="mr-4" color="accent">image</mat-icon>
+            {{ label.photos }}</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <ng-container [ngTemplateOutlet]="photosFieldsetRef"></ng-container>
+      </mat-expansion-panel>
+
+      <!-- Prices -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="mr-4" color="accent">attach_money</mat-icon>
+            {{ label.prices }}</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <ng-container [ngTemplateOutlet]="pricesFieldsetRef"></ng-container>
+      </mat-expansion-panel>
+
+      <!-- Discount -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="mr-4" color="accent">percent</mat-icon>
+            {{ label.discount }}</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <ng-container [ngTemplateOutlet]="discountFieldsetRef"></ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- Form actions -->
+    <div class="form-actions">
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="newProductForm.invalid"
+      >
+        {{ label.submit }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Accordion actions -->
+<ng-template #accordionActionsRef>
+  <div class="mb-4 flex justify-end">
+    <button
+      type="button"
+      mat-stroked-button
+      color="primary"
+      (click)="matAccordion.openAll()"
+    >
+      <mat-icon class="mr-4">unfold_more</mat-icon>
+      {{ label.expandAll }}
+    </button>
+    <button
+      type="button"
+      mat-stroked-button
+      color="primary"
+      (click)="matAccordion.closeAll()"
+    >
+      <mat-icon class="mr-4">unfold_less</mat-icon>
+      {{ label.collapseAll }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+  RENDER TEMPLATES
+
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••• -->
+
+<!-- •••••••••• Product Detail •••••••••• -->
+<ng-template #productDetailsFieldsetRef [formGroup]="newProductForm">
+  <fieldset class="fieldset" formGroupName="details">
+    <legend class="legend">
+      {{ label.productDetails }}
+    </legend>
+    <!-- Name -->
+    <mat-form-field class="w-full" color="primary">
+      <mat-label>{{ label.productTitle }}</mat-label>
+      <input matInput type="text" formControlName="title" #productNameRef />
+      @if (productNameRef.value) {
+        <button
+          type="button"
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ label.clear }}"
+          matTooltipPosition="above"
+          (click)="newProductForm.controls.details.controls.title.reset()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      <mat-error>
+        <ng-container
+          *ngTemplateOutlet="
+            formErrorsRef;
+            context: {
+              $implicit: newProductForm.controls.details.controls.title
+            }
+          "
+        ></ng-container>
+      </mat-error>
+    </mat-form-field>
+    <!-- Description -->
+    <mat-form-field class="w-full" color="primary">
+      <mat-label>{{ label.productDescription }}</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="description"
+        #productDescriptionRef
+      />
+      @if (productDescriptionRef.value) {
+        <button
+          type="button"
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ label.clear }}"
+          matTooltipPosition="above"
+          (click)="newProductForm.controls.details.controls.description.reset()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      <mat-error>
+        <ng-container
+          *ngTemplateOutlet="
+            formErrorsRef;
+            context: {
+              $implicit: newProductForm.controls.details.controls.description
+            }
+          "
+        ></ng-container>
+      </mat-error>
+    </mat-form-field>
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Prices •••••••••• -->
+<ng-template #pricesFieldsetRef [formGroup]="newProductForm">
+  <fieldset class="fieldset mt-4" formArrayName="prices">
+    <legend class="legend">
+      {{ label.prices }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        type="button"
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ label.addPrice }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addPrice()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (
+      priceControl of newProductForm.controls.prices.controls;
+      track priceControl
+    ) {
+      <fieldset
+        class="price fieldset border-slate-700 mt-4"
+        [formGroupName]="$index"
+      >
+        <legend class="font-normal capitalize px-2 text-slate-500">
+          {{ label.price }} ◦ {{ $index + 1 }}
+        </legend>
+        <div class="flex">
+          <div class="flex-1">
+            <!-- Tag -->
+            <mat-form-field class="w-full" color="primary">
+              <mat-label>{{ label.priceTag }}</mat-label>
+              <input matInput type="text" formControlName="tag" #priceTagRef />
+              @if (priceTagRef.value) {
+                <button
+                  type="button"
+                  matSuffix
+                  mat-icon-button
+                  matTooltip="{{ label.clear }}"
+                  matTooltipPosition="above"
+                  (click)="
+                    newProductForm.controls.prices
+                      .at($index)
+                      .controls.tag.reset()
+                  "
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+              <mat-error>
+                <ng-container
+                  *ngTemplateOutlet="
+                    formErrorsRef;
+                    context: {
+                      $implicit:
+                        newProductForm.controls.prices.at($index).controls.tag
+                    }
+                  "
+                ></ng-container>
+              </mat-error>
+            </mat-form-field>
+            <!-- Price -->
+            <mat-form-field class="w-full" color="primary">
+              <mat-label>{{ label.priceAmount }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="price"
+                #pricePriceRef
+              />
+              @if (pricePriceRef.value != '0') {
+                <button
+                  type="button"
+                  matSuffix
+                  mat-icon-button
+                  matTooltip="{{ label.clear }}"
+                  matTooltipPosition="above"
+                  (click)="
+                    newProductForm.controls.prices
+                      .at($index)
+                      .controls.price.reset()
+                  "
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+              <mat-error>
+                <ng-container
+                  *ngTemplateOutlet="
+                    formErrorsRef;
+                    context: {
+                      $implicit:
+                        newProductForm.controls.prices.at($index).controls.price
+                    }
+                  "
+                ></ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          @if ($count > 1) {
+            <div class="ml-4">
+              <button
+                type="button"
+                mat-mini-fab
+                color="primary"
+                matTooltip="{{ label.removePrice }}"
+                matTooltipPosition="above"
+                type="button"
+                (click)="removePrice($index)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      </fieldset>
+    }
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Photos •••••••••• -->
+<ng-template #photosFieldsetRef [formGroup]="newProductForm">
+  <fieldset class="fieldset mt-4" formArrayName="photos">
+    <legend class="legend">
+      {{ label.photos }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ label.addPhoto }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addPhoto()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (
+      photoControl of newProductForm.controls.photos.controls;
+      track photoControl
+    ) {
+      <div class="flex mt-4" [class.mt-6]="$first">
+        <div class="flex-1">
+          <!-- Photo -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ label.photo }} ◦ {{ $index + 1 }}</mat-label>
+            <input matInput type="text" [formControlName]="$index" #photoRef />
+            @if (photoRef.value != 'https://') {
+              <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                matTooltip="{{ label.clear }}"
+                matTooltipPosition="above"
+                (click)="newProductForm.controls.photos.at($index).reset()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit: newProductForm.controls.photos.at($index)
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        @if ($count > 1) {
+          <div class="ml-4">
+            <button
+              mat-mini-fab
+              color="primary"
+              matTooltip="{{ label.removePhoto }}"
+              matTooltipPosition="above"
+              type="button"
+              (click)="removePhoto($index)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </fieldset>
+</ng-template>
+
+<!-- •••••••••• Discount •••••••••• -->
+<ng-template #discountFieldsetRef [formGroup]="newProductForm">
+  <fieldset class="fieldset mt-4">
+    <legend class="legend">
+      {{ label.discount }}
+    </legend>
+    <!-- Description -->
+    <mat-form-field class="w-full" color="primary">
+      <mat-label>{{ label.pricesDiscount }}</mat-label>
+      <input matInput type="text" formControlName="discount" #discountRef />
+      @if (discountRef.value != '0') {
+        <button
+          type="button"
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ label.clear }}"
+          matTooltipPosition="above"
+          (click)="newProductForm.controls.discount.reset()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+
+      <mat-error>
+        <ng-container
+          *ngTemplateOutlet="
+            formErrorsRef;
+            context: {
+              $implicit: newProductForm.controls.discount
+            }
+          "
+        ></ng-container>
+      </mat-error>
+    </mat-form-field>
+  </fieldset>
+</ng-template>
+
+<ng-template #formErrorsRef let-formControl>
+  @if (formControl.hasError('required')) {
+    {{ label.requiredError }}
+  } @else if (formControl.hasError('pattern')) {
+    {{ label.patternError }}
+  } @else if (formControl.hasError('invalidPrice')) {
+    {{ label.invalidPriceError }}
+  } @else if (formControl.hasError('invalidPercentage')) {
+    {{ label.invalidPercentageError }}
+  } @else if (formControl.hasError('duplicated')) {
+    {{ label.duplicatedError }}
+  }
+</ng-template>
+
+<div class="overlay" *ngIf="popup">
+  <div class="popup">
+    <h2>New Product Added</h2>
+    <a class="close" (click)="hideMessage()">&times;</a>
+    <div class="content">The new product was added to catalog!!</div>
+  </div>
+</div>

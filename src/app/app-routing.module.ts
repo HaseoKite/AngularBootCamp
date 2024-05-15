@@ -21,6 +21,13 @@ export const routes: Routes = [
         (m) => m.ListProductsRoutingModule
       )
   },
+  {
+    path: 'add-product',
+    loadChildren: () =>
+      import('./products/new-product/new-product.module').then(
+        (m) => m.NewProductModule
+      )
+  },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];

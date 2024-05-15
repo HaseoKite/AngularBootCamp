@@ -1,12 +1,14 @@
+export type PhotosT = string;
+
+export type PricesT = { [tag: string]: number };
+
 export type ProductT = {
-  id: string;
+  id: number;
   title: string;
   prices: PricesT;
-  photos: string[];
+  photos: Array<PhotosT>;
   description: string;
-  offerDiscount?: number;
+  offerDiscount: number;
 };
 
 export type ProductIdT = Pick<ProductT, 'id' | 'title'>;
-
-export type PricesT = { [tag: string]: number };
